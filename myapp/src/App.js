@@ -39,27 +39,7 @@ class App extends React.Component{
       UserStore.isLoggedIn = false;
     }
   }
-  // API CODES TO LOGOUT ON THE CLICK OF THE LOGOUT BUTTON
-  async doLogout(){
-    try {
-      let res = await fetch('/logout',{
-        method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      });
-      let result = await res.json();
-      
-      if (result && result.success){
-        UserStore.isLoggedIn = false;
-        UserStore.email = '';
-      }
-    }
-    catch(e) {
-      console.log(e)
-    }
-  } 
+
   render(){
       return(
         <Router>
