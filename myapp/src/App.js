@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import { observer } from 'mobx-react';
 import UserStore from './stores/UserStore';
 import LoginForm from './components/LoginForm';
+import Logout from './components/Logout';
 import './App.css';
 import './components/Home.css'
 import Signup from './components/Signup';
@@ -73,7 +74,7 @@ class App extends React.Component{
                   <li><Link to="/">Home</Link></li>
                   <li><Link to="/events">Booked Sessions</Link></li>
                   <li><Link to="/login">Login</Link></li>
-                  <li className="last"><Link to="#">Logout</Link></li>
+                  <li><Link to="/">Logout</Link></li>
                 </ul>
               </nav>
             </header>
@@ -83,6 +84,7 @@ class App extends React.Component{
               <Route path='/events' component={Events}/>
               <Route path='/signup' component={Signup} />
               <Route path='/login' component={LoginForm} />
+              <Route path='/logout' component={Logout} />
               <Route path='/eventreg' component={EventReg} />
           </Switch>
           <div class="wrapper row4">
