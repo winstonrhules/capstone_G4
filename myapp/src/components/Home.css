@@ -13,8 +13,11 @@ code{font-weight:normal; font-style:normal; font-family:Georgia, "Times New Roma
 .fl_left{float:left;}
 .fl_right{float:right;}
 .fl_center{text-align:center;}
+.img {
+    width: 100%;
+}
 
-img{margin:0; padding:0; border:none; line-height:normal; vertical-align:middle;}
+img{margin:0; padding:0; border:none; line-height:normal; vertical-align:middle; width: 100%;}
 .imgholder, .imgl, .imgr{padding:4px; border:1px solid #D6D6D6; text-align:center;}
 .imgl{float:left; margin:0 15px 15px 0; clear:left;}
 .imgr{float:right; margin:0 0 15px 15px; clear:right;}
@@ -126,10 +129,10 @@ input, textarea, select{font-size:12px; font-family:Georgia,"Times New Roman",Ti
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
 }
-/* 
+
 #container #homepage #services article figure footer :hover{
     background-color: rgb(65, 230, 0);
-} */
+}
 
 #container #homepage #intro{margin: 0;}
 #container #homepage #intro article{margin: 0;}
