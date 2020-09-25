@@ -10,7 +10,7 @@ export default class Home extends Component {
         <div>
 <div class="wrapper row2">
   <div id="container" class="clear">
-    <section id="slider"><a href="#"><img src={require("../images/demo/evangeline-shaw-xRlI-L-kvrw-unsplash.jpg")} style={{width:960 +'px', height: 660+'px' }}  alt=""/><div className="text-content">2020 National Conference Events</div></a>
+    <section id="slider"><a href="/"><img src={require("../images/demo/evangeline-shaw-xRlI-L-kvrw-unsplash.jpg")} style={{width:960 +'px', height: 660+'px' }}  alt=""/><div className="text-content">2020 National Conference Events</div></a>
     
     </section>
     
