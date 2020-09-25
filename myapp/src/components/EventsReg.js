@@ -3,9 +3,9 @@ import axios from "axios";
 import { EVENTS_API } from "../constants";
 
 export default class Signup extends Component {
-   
+   username = localStorage.getItem("username");
     state =  {
-        name: "", 
+        name: this.username, 
         email: "",
         number: "",
         event: "",
@@ -17,17 +17,19 @@ export default class Signup extends Component {
 
     signUp = e => {
         e.preventDefault();
+        const { history } =this.props;
         axios.post(EVENTS_API, this.state)
         .then(() => {
             console.log(this.state)
             console.log(this.state)
             this.setState({
-                name: "", 
+                name: this.username, 
                 email: "",
                 number: "",
                 event: "",
             })
-            alert(`Successfully registered for the event`);
+            alert(`Hi ${this.state.name}, you have successfully registered for the event`);
+            history.push('/events');
         }).catch(function(error) {
             console.log(error);
         })
