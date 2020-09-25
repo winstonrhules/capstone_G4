@@ -79,7 +79,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backendapi.wsgi.application'
 
-CORS_ORIGIN_WHITELIST = ["http://localhost:3000"]
+CORS_ORIGIN_WHITELIST = ["http://localhost:3000",
+        "http://localhost:3001"
+]
 
 
 # Database
