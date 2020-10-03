@@ -9,4 +9,3 @@ urlpatterns = [
     path('api/logoutall/', knox_views.LogoutAllView.as_view(), name='logoutall'),
 
 ]
-# Password456@

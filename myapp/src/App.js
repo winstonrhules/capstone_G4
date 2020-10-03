@@ -9,6 +9,8 @@ import Signup from './components/Signup';
 import Home from './components/Home';
 import EventReg from './components/EventsReg';
 import Events from './components/Events';
+import Admin from './components/Admin';
+import Logout from './components/Logout';
 // import  LOGOUT_URL from "../constants";
 
 class App extends React.Component{
@@ -88,7 +90,7 @@ class App extends React.Component{
                   {/* <li><Link to="/">Home</Link></li> */}
                   <li><Link to="/events">Booked Sessions</Link></li>
                   <li><Link to="/">Login</Link></li>
-                  <li className="last" onClick={this.doLogout}><Link to="/">Logout</Link></li>
+                  <li className="last" onClick={this.Logout}><Link to="/">Logout</Link></li>
                 </ul>
               </nav>
             </header>
@@ -96,8 +98,10 @@ class App extends React.Component{
           <Switch>
               <Route exact path='/' component={LoginForm} />
               <Route path='/events' component={Events}/>
+              <Route path='/admin' component={Admin}/>
               <Route path='/signup' component={Signup} />
               <Route path='/home' component={Home} />
+              <Route path='/home' component={Logout} />
               <Route path='/eventreg' component={EventReg} />
           </Switch>
           <div class="wrapper row4">
