@@ -21,7 +21,7 @@ export default class Signup extends Component {
         .then((data) => {
             console.log(this.state);
             console.log(data)
-            if (data.status == 200){
+            if (data.status === 200){
             alert(`Successfully registered`);
             }
             this.setState({

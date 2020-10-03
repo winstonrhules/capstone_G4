@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '5$@xa&$6hs5qtj+^688$6i16$p9tkp)vw=p%+t*gt&!s9h3ub_'
+SECRET_KEY = 'el06l%x-=0%9whtka-v$h#q*hk!m^h5lh%w@cifn^23%gyx(=%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,11 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'knox',
-    'corsheaders',
     'account',
-    'addevents',
-    'eventbooking',
-
+    'event',
 ]
 
 MIDDLEWARE = [
@@ -54,10 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-
 ]
-
 
 ROOT_URLCONF = 'backendapi.urls'
 
@@ -78,8 +72,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'backendapi.wsgi.application'
-
-CORS_ORIGIN_WHITELIST = ["http://localhost:3000"]
 
 
 # Database
@@ -130,8 +122,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
