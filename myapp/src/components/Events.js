@@ -10,7 +10,7 @@ export default class Events extends Component {
           error: null,
           isLoaded: false,
           items: [],
-          value: this.username,
+          user: this.username,
         };
       }
       apiEvents = [];
@@ -39,14 +39,15 @@ export default class Events extends Component {
 
       onChangeHandler(e) {
         console.log(e.target.value);
-        let newArray = this.apiEvents.filter((d)=>{
+        let newArray = this.state.items.filter((d)=>{
           console.log(d)
             let searchValue = d.name.toLowerCase();
+            // let searchValue = localStorage.getItem("username");
             return searchValue.indexOf(e.target.value) !== -1;
         });
         console.log(newArray)
         this.setState({
-            users:newArray
+            items:newArray
         })
     }
     
@@ -62,7 +63,7 @@ export default class Events extends Component {
           return (
             <div style={{backgroundColor: "white", color: "black", minHeight: "700px",width: "80%",marginLeft: "10%"}}>
                <h1>Users List</h1>
-                    <input type="text" value={this.state.value} placeholder="Search by user name..." 
+                    <input type="text" value={this.state.user} placeholder="Search by user name..." 
                     onChange={this.onChangeHandler.bind(this)}/>
                 <table>
                   <tr>
