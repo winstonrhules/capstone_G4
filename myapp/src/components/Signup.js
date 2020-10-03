@@ -75,7 +75,7 @@ export default class Signup extends Component {
 
                             <div className="input-group">
                         <span><i className="fa fa-lock" aria-hidden="true"></i></span>
-                                <input type="Password" name="password"
+                                <input type="password" name="password"
                                 value={this.state.password}
                                 onChange={this.onChange} 
                                 placeholder="Password" required minLength={8}/>
