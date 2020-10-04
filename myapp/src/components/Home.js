@@ -1,10 +1,56 @@
 import React, { Component } from 'react';
+import axios from "axios";
+import { EVENT_LIST } from "../constants";
+import { BOOK_EVENT } from "../constants";
 import { Link } from 'react-router-dom';
 import './Home.css' ;
 import '../App.css';
 
 export default class Home extends Component {
+  username = localStorage.getItem("username");
+  constructor(props) {
+    super(props);
+   
+    this.state = {
+      error: null,
+      isLoaded: false,
+      items: [],
+      name: this.username,
+    };
+  }
+  
+  componentDidMount() {
+   
+    fetch(EVENT_LIST)
+      .then(res => res.json())
+      .then(
+        result => {
+          this.setState({
+            isLoaded: true,
+            items: result,
+          });
+          console.log(result)
+        },
+        error => {
+          this.setState({
+            isLoaded: true,
+            error: error
+          });
+        }
+      );
+  }
+
+ 
+
     render() {
+      const { error, isLoaded, items } = this.state;
+      
+      if (error) {
+        return <div>Error: {error.message}</div>;
+      } else if (!isLoaded) {
+        return <div>Loading...</div>;
+      } else{
+        console.log(this.state.items);
         return (
         
         <div>
@@ -16,126 +62,31 @@ export default class Home extends Component {
     
     <div id="homepage">
       <section id="services" class="clear">
-        <article class="one_third">
-          <figure><img src={require("../images/demo/1.jpg")} alt="" style={{width:290 +'px', height: 180+'px' }} />
-            <figcaption>
-              <h2>Production Conference</h2>
-              <i className="fa fa-map-marker" aria-hidden="true"> Accra, Ghana</i>
-              
-              <i className="fa fa-microphone" aria-hidden="true"> Gilbert Kennedy</i>
-              
-              {/* <i>Tagline</i> */}
-
-              <i className="fa fa-money" aria-hidden="true"> GHS 50</i>
-              
-              <i className="fa fa-calendar-o" aria-hidden="true"> 2020-09-25</i>
-              
-              <i className="fa fa-clock-o" aria-hidden="true">08:00 AM</i>
-              <Link to="/eventreg" className="eventbttn">Book Event</Link>
-            </figcaption>
-          </figure>
-        </article>
-        <article class="one_third">
-          <figure><img src={require("../images/demo/2.jpg")} alt="" style={{width:290 +'px', height: 180+'px' }} />
-              
-            <figcaption>
-              <h2>The design Conference</h2>
-              <i className="fa fa-map-marker" aria-hidden="true"> Accra, Ghana</i>
-              
-              <i className="fa fa-microphone" aria-hidden="true"> Gilbert Kennedy</i>
-              
-              {/* <i>Tagline</i> */}
-
-              <i className="fa fa-money" aria-hidden="true"> GHS 50</i>
-              
-              <i className="fa fa-calendar-o" aria-hidden="true"> 2020-09-25</i>
-              
-              <i className="fa fa-clock-o" aria-hidden="true"> 08:00 AM</i>
-              <Link to="/eventreg" className="eventbttn">Book Event</Link>
-            </figcaption>
-          </figure>
-        </article>
-        <article class="one_third lastbox">
-          <figure><img src={require("../images/demo/3.jpg")} alt="" style={{width:290 +'px', height: 180+'px' }} />
-            <figcaption>
-              <h2>The Great Movie Premier</h2>
-              <i className="fa fa-map-marker" aria-hidden="true"> Accra, Ghana</i>
-              
-              <i className="fa fa-microphone" aria-hidden="true"> Gilbert Kennedy</i>
-              
-              {/* <i>Tagline</i> */}
-
-              <i className="fa fa-money" aria-hidden="true"> GHS 50</i>
-              
-              <i className="fa fa-calendar-o" aria-hidden="true"> 2020-09-25</i>
-              
-              <i className="fa fa-clock-o" aria-hidden="true"> 08:00 AM</i>
-              <Link to="/eventreg" className="eventbttn">Book Event</Link>
-            </figcaption>
-          </figure>
-        </article>
-      </section>
-      
-      <section id="services" class="clear">
-        <article class="one_third">
-          <figure><img src={require("../images/demo/4.jpg")} alt="" style={{width:290 +'px', height: 180+'px' }} />
-            <figcaption>
-              <h2>Community Shield Tournament </h2>
-              <i className="fa fa-map-marker" aria-hidden="true"> Accra, Ghana</i>
-              
-              <i className="fa fa-microphone" aria-hidden="true"> Gilbert Kennedy</i>
-              
-              {/* <i>Tagline</i> */}
-
-              <i className="fa fa-money" aria-hidden="true"> GHS 50</i>
-              
-              <i className="fa fa-calendar-o" aria-hidden="true"> 2020-09-25</i>
-              
-              <i className="fa fa-clock-o" aria-hidden="true"> 08:00 AM</i>
-              <Link to="/eventreg" className="eventbttn">Book Event</Link>
-            </figcaption>
-          </figure>
-        </article>
-        <article class="one_third">
-          <figure><img src={require("../images/demo/5.jpg")} alt="" style={{width:290 +'px', height: 180+'px' }} />
-              
-            <figcaption>
-              <h2>Intro to Django Framework</h2>
-              <i className="fa fa-map-marker" aria-hidden="true"> Accra, Ghana</i>
-              
-              <i className="fa fa-microphone" aria-hidden="true"> Gilbert Kennedy</i>
-              
-              {/* <i>Tagline</i> */}
-
-              <i className="fa fa-money" aria-hidden="true"> GHS 50</i>
-              
-              <i className="fa fa-calendar-o" aria-hidden="true"> 2020-09-25</i>
-              
-              <i className="fa fa-clock-o" aria-hidden="true"> 08:00 AM</i>
-              <Link to="/eventreg" className="eventbttn">Book Event</Link>
-            </figcaption>
-          </figure>
-        </article>
-        <article class="one_third lastbox">
+        {items.map(item =>
+       ( <article class="one_third lastbox">
           <figure><img src={require("../images/demo/6.jpg")} alt="" style={{width:290 +'px', height: 180+'px' }} />
-            <figcaption>
-              <h2>DEV TECH Conference</h2>
-              <i className="fa fa-map-marker" aria-hidden="true"> Accra, Ghana</i>
+          
+            <figcaption key={item.id}>
+              <h2>{item.topic}</h2>
+            <i>{item.tagline}</i> <br/>
+            <i>Room Capacity:{item.room_capacity}</i>
+        <i className="fa fa-map-marker" aria-hidden="true">{item.location}</i>
               
-              <i className="fa fa-microphone" aria-hidden="true"> Gilbert Kennedy</i>
+              <i className="fa fa-microphone" aria-hidden="true">{item.speaker}</i>
               
               {/* <i>Tagline</i> */}
 
-              <i className="fa fa-money" aria-hidden="true"> GHS 50</i>
+              <i className="fa fa-money" aria-hidden="true">{item.price}</i>
               
-              <i className="fa fa-calendar-o" aria-hidden="true"> 2020-09-25</i>
+              <i className="fa fa-clock-o" aria-hidden="true">{item.time}</i>
               
-              <i className="fa fa-clock-o" aria-hidden="true"> 08:00 AM</i>
-              
-              <Link to="/eventreg" className="eventbttn">Book Event</Link>
+              <Link  to="eventreg" className="eventbttn" onClick={this.eventReg}>Book Event</Link>
             </figcaption>
           </figure>
+        
         </article>
+        )
+        )}
       </section>
      
     </div>
@@ -147,4 +98,4 @@ export default class Home extends Component {
 
         )
     }
-}
+}}

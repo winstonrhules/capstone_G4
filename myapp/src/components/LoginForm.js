@@ -34,6 +34,9 @@ export default class Login extends Component {
                 password: " ",
             })
         })
+        .catch((err) => {
+            alert(`Wrong password or username`)
+          })
     }
     resetForm() {
         this.setState({
