@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import { EVENTS_API } from "../constants";
 
 export default class Events extends Component {
@@ -52,10 +53,10 @@ export default class Events extends Component {
     // }
     
       render() {
-        const { error, isLoaded, items } = this.state;
+        const { user, isLoaded, items } = this.state;
       
-        if (error) {
-          return <div>Error: {error.message}</div>;
+        if (!user) {
+          return <div>Please login to see your orders</div>;
         } else if (!isLoaded) {
           return <div>Loading...</div>;
         } else{
@@ -64,6 +65,10 @@ export default class Events extends Component {
             <div style={{backgroundColor: "white", color: "black", minHeight: "700px",width: "80%",marginLeft: "10%"}}>
                     {/* <input type="text" value={this.state.user} placeholder="Search by user name..." 
                     onChange={this.onChangeHandler.bind(this)}/> */}
+                    <button className="eventbttn" style={{color: "white"}}>
+                    <Link to="/home">Back Home</Link>
+                    </button>
+                    
                 <table>
                   <tr>
                     <th>Name</th>
