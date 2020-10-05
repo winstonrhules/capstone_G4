@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import axios from "axios";
 import { EVENT_LIST } from "../constants";
-import { BOOK_EVENT } from "../constants";
 import { Link } from 'react-router-dom';
 import './Home.css' ;
 import '../App.css';
