@@ -56,9 +56,9 @@ export default class Events extends Component {
         const { user, isLoaded, items } = this.state;
       
         if (!user) {
-          return <div>Please login to see your orders</div>;
+          return <div style={{backgroundColor: "white",fontSize: "5rem", color: "black", minHeight: "700px",width: "80%",marginLeft: "10%"}}>Please login to see your orders</div>;
         } else if (!isLoaded) {
-          return <div>Loading...</div>;
+          return <div style={{backgroundColor: "white",fontSize: "5rem", color: "black", minHeight: "700px",width: "80%",marginLeft: "10%"}}>Loading...</div>;
         } else{
           console.log(this.state.items);
           return (
