@@ -17,12 +17,14 @@ export default class Signup extends Component {
 
     signUp = e => {
         e.preventDefault();
+        const { history } =this.props;
         axios.post(USERREG_URL, this.state)
         .then((data) => {
             console.log(this.state);
             console.log(data)
-            if (data.status == 200){
+            if (data.status === 200){
             alert(`Successfully registered`);
+            history.push('/');
             }
             this.setState({
                 first_name: "",
@@ -31,7 +33,9 @@ export default class Signup extends Component {
                 email: "",
                 password: "",
             })
-        })
+        }).catch((err) => {
+            alert(`Username already in use. Change the username`)
+          })
     }
     render() {
         return (
@@ -75,7 +79,7 @@ export default class Signup extends Component {
 
                             <div className="input-group">
                         <span><i className="fa fa-lock" aria-hidden="true"></i></span>
-                                <input type="Password" name="password"
+                                <input type="password" name="password"
                                 value={this.state.password}
                                 onChange={this.onChange} 
                                 placeholder="Password" required minLength={8}/>

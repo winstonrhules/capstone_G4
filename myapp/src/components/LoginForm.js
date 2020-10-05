@@ -16,13 +16,16 @@ export default class Login extends Component {
 
     logIn = e => {
         e.preventDefault();
+        const { history } =this.props;
         axios.post(LOGIN_URL, this.state)
         .then((data) => {
             console.log(this.state);
             console.log(data);
-            if (data.status == 200){
-            alert('Successfully logged in');
+            if (data.status === 200){
+            alert(`Hi ${this.state.username},you have successfully logged in`);
             localStorage.setItem("token", data.data.token);
+            localStorage.setItem("username", this.state.username);
+            history.push('/home');
             }else{
                 alert('user session expired, please log in again')
             }
@@ -31,6 +34,9 @@ export default class Login extends Component {
                 password: " ",
             })
         })
+        .catch((err) => {
+            alert(`Wrong password or username`)
+          })
     }
     resetForm() {
         this.setState({
