@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'backendapi.wsgi.application'
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
-    "http://Capstoneg4.azurewebsites.net"
+    "http://capstoneg4.azurewebsites.net"
 ]
 
 # Database
