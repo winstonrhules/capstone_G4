@@ -86,7 +86,7 @@ class App extends React.Component{
               </div>
               <nav>
                 <ul>
-                  <li><Link to="/home">Home</Link></li>
+                  {/* <li><Link to="/home">Home</Link></li> */}
                   <li><Link to="/events">Booked Sessions</Link></li>
                   <li><Link to="/">Login</Link></li>
                   <li className="last" onClick={this.doLogout}><Link to="/">Logout</Link></li>

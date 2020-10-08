@@ -68,16 +68,14 @@ export default class Events extends Component {
                   <tr>
                     <th>Name</th>
                     <th>Event</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
+                    <th>Time</th>
                   </tr>
               {items.map(item =>
               (
                 <tr key={item.id}>
-                <td>{item.name}</td>
+                <td>{item.user}</td>
                 <td>{item.event}</td>
-                <td>{item.email}</td>
-                <td>{item.number}</td>
+                <td>{item.time}</td>
               </tr>
               
               )

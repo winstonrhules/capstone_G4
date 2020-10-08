@@ -1,15 +1,46 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import { EVENTS_API } from "../constants";
+import { EVENT_LIST } from "../constants";
+import { BOOK_EVENT } from "../constants";
 
 export default class Signup extends Component {
-   username = localStorage.getItem("username");
-    state =  {
-        name: this.username, 
-        email: "",
-        number: "",
-        event: "",
-    }
+    username = localStorage.getItem("username");
+    constructor(props) {
+        super(props);
+       
+        this.state = {
+          error: null,
+          isLoaded: false,
+          items: [],
+          validationError: "",
+          name: this.username,
+          user: this.username, 
+          time: "",
+          event: "",
+        };
+      }
+      
+      componentDidMount() {
+       
+        fetch(EVENT_LIST)
+          .then(res => res.json())
+          .then(
+            result => {
+              this.setState({
+                isLoaded: true,
+                items: result,
+              });
+              console.log(result)
+            },
+            error => {
+              this.setState({
+                isLoaded: true,
+                error: error
+              });
+            }
+          );
+      }
+    
 
     onChange = e => {
         this.setState({ [e.target.name]: e.target.value });
@@ -18,23 +49,31 @@ export default class Signup extends Component {
     signUp = e => {
         e.preventDefault();
         const { history } =this.props;
-        axios.post(EVENTS_API, this.state)
+        const body = {
+            user: null,
+            time: this.state.time,
+            event: this.state.event
+        }
+        axios.post(BOOK_EVENT, body)
         .then(() => {
             console.log(this.state)
             console.log(this.state)
             this.setState({
-                name: this.username, 
-                email: "",
-                number: "",
-                event: "",
+                user: this.username, 
+                // number: "",
+                time: '',
+                event: '',
             })
             alert(`Hi ${this.state.name}, you have successfully registered for the event`);
             history.push('/events');
         }).catch(function(error) {
-            console.log(error);
+            alert('Sorry, no seat left')
         })
     }
+
+    
     render() {
+        const { error, isLoaded, items } = this.state;
         return (
             // Registration form 
             
@@ -43,40 +82,56 @@ export default class Signup extends Component {
                         <form onSubmit={this.signUp} >
                         <div className="input-group">
                         <span><i className="fa fa-user" aria-hidden="true"></i></span>
-                                <input type="text" name="name" 
-                                value={this.state.name} 
+                                <input type="text" name="user" 
+                                value={this.state.user} 
                                 onChange={this.onChange}
                                 placeholder="Your Name" required/>
-                                </div>
-
-                            <div className="input-group">
-                        <span><i className="fa fa-envelope" aria-hidden="true"></i></span>
-                                <input type="email" name="email"
-                                value={this.state.email} 
+                        </div>
+                        {/* <div className="input-group">
+                                <input type="text" name="number" 
+                                value={this.state.number} 
                                 onChange={this.onChange}
-                                placeholder="Email" required/>
-                            </div>
+                                placeholder="Your Active Number" required/>
+                        </div> */}
 
-                            <div className="input-group">
-                                <input type="text" name="number"
-                                value={this.state.number}
-                                onChange={this.onChange} 
-                                placeholder="Phone Number" required/>
-                            </div>
-
-                            <div className="input-group">
-                                <select name="event" value={this.state.event} onChange={this.onChange}>
-                                    <option>Select Event</option>
-                                    <option event="Community Shield Tournament">Community Shield Tournament</option>
-                                    <option event="Intro To Django Framework">Intro To Django Framework</option>
-                                    <option event="DEV TECH Conference">DEV TECH Conference</option>
-                                    <option event="Production Conference">Production Conference</option>
-                                    <option event="The Design Conference">The Design Conference</option>
-                                    <option event="The Great Movie Premier">The Great Movie Premier</option>
+                                <div className="input-group">
+                                <select name="time" value={this.state.time} onChange={this.onChange}>
+                                    <option>Select Time</option>
+                                    <option time="Morning">Morning</option>
+                                    <option time="Midmorning">Midmorning</option>
+                                    <option time="Afternoon">Afternoon</option>
                                 </select>
 
                             </div>
-                                <button className="bttn">Register Now</button>
+
+                            
+
+                            <div className="input-group">
+                                <select name="event" value={this.state.event} 
+                                onChange={e =>
+                                    this.setState({
+                                      event: e.target.value,
+                                      validationError:
+                                        e.target.value === ""
+                                          ? "You must select an event"
+                                          : ""
+                                    })
+                                  }
+                                >
+                                <option>Select an event</option>
+                                {this.state.items.map((item) => 
+                                <option key={item.id} value={item.id}>{item.topic}</option>)}
+                                </select>
+                                <div
+                                    style={{
+                                        color: "red",
+                                        marginTop: "5px"
+                                    }}
+                                    >
+                                    {this.state.validationError}
+                                    </div>
+                            </div>
+                                <button className="bttn">Register Event</button>
                             
                         </form>
             </div>  
